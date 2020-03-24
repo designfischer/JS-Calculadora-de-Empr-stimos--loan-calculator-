@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Calculadora de Empréstimos</title>
+
+    <style> 
+        #loading, .results {
+            display: none;
+        }
+    </style>
   </head>
   <body class='bg-light'>
     <div class="container">
@@ -38,7 +44,7 @@
                         <img src="img/loading.gif" alt="">
                     </div>
                     <!--Resultado-->
-                    <div class="results pt-4">
+                    <div class="results pt-4" id="results">
                         <h5>Resultados</h5>
                         <div class="form-group row">                               
                             <label for="monthly-payment" class="col-sm-6 col-form-label">Valor Mensal</label>

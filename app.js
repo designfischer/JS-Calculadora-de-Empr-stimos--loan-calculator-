@@ -10,10 +10,17 @@ const outputTotalPayment = document.getElementById('total-payment');
 const outputTotalInterest = document.getElementById('total-interest');
 
 // Listener para o botão de calcular
-btnSubmit.addEventListener('submit', calculateResults)
+btnSubmit.addEventListener('submit', function(e){
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('loading').style.display = 'block';
+    
+    setTimeout(calculateResults, 1000);
+    
+    e.preventDefault();
+})
 
 // Calcular os resultados
-function calculateResults(e){
+function calculateResults(){
         
     const principal = parseFloat(inputAmount.value); // Pega o valor da variável e converte para o tipo float
     const calculatedInterest = parseFloat(inputInterest.value) / 100 / 12; // Converte a porcentagem em decimais e divide pelos meses
@@ -28,14 +35,20 @@ function calculateResults(e){
         outputMonthlyPayment.value = monthly.toFixed(2);        
         outputTotalPayment.value = (monthly * calculatedPayments).toFixed(2);
         outputTotalInterest.value = ((monthly * calculatedPayments) - principal).toFixed(2);
+
+        document.getElementById('results').style.display = 'block';
+        document.getElementById('loading').style.display = 'none';
+
     } else {        
         showError('Preencha todos os valores')
     }
-    e.preventDefault();
 }
 
 // Mostrar erro
 function showError(error){
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('loading').style.display = 'none';
+
     const errorDiv = document.createElement('div');
 
     const card = document.querySelector('.card');
@@ -45,6 +58,7 @@ function showError(error){
     errorDiv.appendChild(document.createTextNode(error));
     card.insertBefore(errorDiv, heading);
     setTimeout(clearError, 1000);
+    
 }
 
 // Apagar mensagem de erro
